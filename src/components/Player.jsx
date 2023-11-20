@@ -1,12 +1,20 @@
 import { useState } from "react";
 
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({
+  initialName,
+  symbol,
+  isActive,
+  onChangeName,
+}) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
   function handleEditClick() {
     // setIsEditing(!isEditing); // it will do opposite (true to false or false to true) // schedules a state update to true
     setIsEditing((edting) => !edting); // it is recommended by react to use arrow function while dealing with this conditon
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   }
   function handleChange(event) {
     console.log(event.target.value);
